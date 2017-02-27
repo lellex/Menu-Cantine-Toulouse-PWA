@@ -1,0 +1,43 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Sélectionner vos cantines</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only  (click)="addSelectedCantine()">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <div>
+    <ion-segment [(ngModel)]="cantineType">
+      <ion-segment-button value="mat">
+        Maternelle
+      </ion-segment-button>
+      <ion-segment-button value="elem">
+        Elementaire
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="cantineType">
+    <ion-list *ngSwitchCase="'mat'">
+      <button ion-item *ngFor="let item of items" (click)="selectCantine(item)" icon-left>
+        <ion-icon *ngIf="isHidden(item)" name="checkmark" [ngStyle]="{'color': '#78BD43'}" item-right></ion-icon>
+        {{ item.title }}
+      </button>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'elem'">
+      <button ion-item *ngFor="let item of items" (click)="selectCantine(item)" icon-left>
+        <ion-icon *ngIf="isHidden(item)" name="checkmark" [ngStyle]="{'color': '#78BD43'}" item-right></ion-icon>
+        {{ item.title }}
+      </button>
+    </ion-list>
+  </div>
+</ion-content>
