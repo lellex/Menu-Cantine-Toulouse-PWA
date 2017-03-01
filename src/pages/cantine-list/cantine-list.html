@@ -25,19 +25,19 @@
     </ion-segment>
   </div>
 
-  <div [ngSwitch]="cantineType">
+  <div class="switch-data-container" [ngSwitch]="cantineType">
     <ion-list *ngSwitchCase="'mat'">
-      <button ion-item *ngFor="let item of items" (click)="selectCantine(item)" icon-left>
+      <ion-item *ngFor="let item of mats" (click)="selectCantine(item)">
         <ion-icon *ngIf="isHidden(item)" name="checkmark" [ngStyle]="{'color': '#78BD43'}" item-right></ion-icon>
-        {{ item.title }}
-      </button>
+        {{ item.name }}
+      </ion-item>
     </ion-list>
 
     <ion-list *ngSwitchCase="'elem'">
-      <button ion-item *ngFor="let item of items" (click)="selectCantine(item)" icon-left>
+      <ion-item *ngFor="let item of elems" (click)="selectCantine(item)">
         <ion-icon *ngIf="isHidden(item)" name="checkmark" [ngStyle]="{'color': '#78BD43'}" item-right></ion-icon>
-        {{ item.title }}
-      </button>
+        {{ item.name }}
+      </ion-item>
     </ion-list>
   </div>
 </ion-content>

@@ -1,98 +1,54 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+import {cantineService} from '../api.service';
 
 @Component({
   selector: 'page-cantine-list',
   templateUrl: 'cantine-list.html'
 })
 export class CantineListPage {
-  items = [];
+  mats = [];
+  elems = [];
   cantineType: string = "mat";
   selectedCantines = [];
 
-  constructor(public nav: NavController) {
-    this.items = [
-      {
-        'id': 1,
-        'title': 'Angular',
-        'icon': 'angular',
-        'description': 'A powerful Javascript framework for building single page apps. Angular is open source, and maintained by Google.',
-        'color': '#E63135'
-      },
-      {
-        'id': 2,
-        'title': 'CSS3',
-        'icon': 'css3',
-        'description': 'The latest version of cascading stylesheets - the styling language of the web!',
-        'color': '#0CA9EA'
-      },
-      {
-        'id': 3,
-        'title': 'HTML5',
-        'icon': 'html5',
-        'description': 'The latest version of the web\'s markup language.',
-        'color': '#F46529'
-      },
-      {
-        'id': 4,
-        'title': 'JavaScript',
-        'icon': 'javascript',
-        'description': 'One of the most popular programming languages on the Web!',
-        'color': '#FFD439'
-      },
-      {
-        'id': 5,
-        'title': 'Sass',
-        'icon': 'sass',
-        'description': 'Syntactically Awesome Stylesheets - a mature, stable, and powerful professional grade CSS extension.',
-        'color': '#CE6296'
-      },
-      {
-        'id': 6,
-        'title': 'NodeJS',
-        'icon': 'nodejs',
-        'description': 'An open-source, cross-platform runtime environment for developing server-side Web applications.',
-        'color': '#78BD43'
-      },
-      {
-        'id': 7,
-        'title': 'Python',
-        'icon': 'python',
-        'description': 'A clear and powerful object-oriented programming language!',
-        'color': '#3575AC'
-      },
-      {
-        'id': 8,
-        'title': 'Markdown',
-        'icon': 'markdown',
-        'description': 'A super simple way to add formatting like headers, bold, bulleted lists, and so on to plain text.',
-        'color': '#412159'
-      },
-      {
-        'id': 9,
-        'title': 'Tux',
-        'icon': 'tux',
-        'description': 'The official mascot of the Linux kernel!',
-        'color': '#000'
-      }
-    ]
+  constructor(public nav: NavController, private cantineService : cantineService, params: NavParams) {
+    this.selectedCantines = params.data.selectedCantines;
   }
 
   selectCantine(item) {
-    let index = this.selectedCantines.indexOf(item.id);
+    let index = this.selectedCantines.map(function(x) {return x.id; }).indexOf(item.id);
     if (index > -1) {
       this.selectedCantines.splice(index, 1);    
     } else {
-      this.selectedCantines.push(item.id);    
+      this.selectedCantines.push(item);    
     }
   }
 
   addSelectedCantine() {
-    // add to service worker updated selected cantine
+    localStorage.setItem('selectedCantine', JSON.stringify(this.selectedCantines));
     this.nav.pop();
   }
 
   isHidden(item) {
-    return this.selectedCantines.indexOf(item.id) > -1 ? true : false;
+    return this.selectedCantines.map(function(x) {return x.id; }).indexOf(item.id) > -1 ? true : false;
   }
+  
+  ngOnInit() {
+    this.cantineService.getAllMaternelles().subscribe(p =>  {
+      this.mats = p.sort(compare);
+    });
+    this.cantineService.getAllElementaires().subscribe(p =>  {
+      this.elems = p.sort(compare);
+    });
+  }
+}
+
+
+function compare(a,b) {
+  if (a.name < b.name)
+    return -1;
+  if (a.name > b.name)
+    return 1;
+  return 0;
 }

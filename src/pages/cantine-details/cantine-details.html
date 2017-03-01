@@ -1,12 +1,62 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{ item.title }}
+      {{ currentCantine.name }}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-icon [name]="'logo-' + item.icon" [ngStyle]="{'color': item.color}"></ion-icon>
-  {{ item.description }}
+  <ion-card>
+     <ion-item class="week">
+        <button ion-button item-left (click)="weekBack()">
+          <ion-icon name="arrow-round-back"></ion-icon>
+        </button>
+        {{ currentWeek }}
+        <button ion-button item-right (click)="weekForward()">
+          <ion-icon name="arrow-round-forward"></ion-icon>
+        </button>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item class="week">
+        <button ion-button item-left (click)="dayBack()">
+          <ion-icon name="arrow-round-back"></ion-icon>
+        </button>
+        {{ currentDay }}
+        <button ion-button item-right (click)="dayForward()">
+          <ion-icon name="arrow-round-forward"></ion-icon>
+        </button>
+    </ion-item>
+    <ion-list>
+      <ion-list-header>
+        Pain
+      </ion-list-header>
+      <ion-item  *ngFor="let item of currentMenu['Pain']">
+        {{ item.menu }}
+      </ion-item>
+      <ion-list-header>
+        Entrée
+      </ion-list-header>
+      <ion-item  *ngFor="let item of currentMenu['Entrée']">
+        {{ item.menu }}
+      </ion-item>
+      <ion-list-header>
+        Plat
+      </ion-list-header>
+      <ion-item  *ngFor="let item of currentMenu['Plat']">
+        {{ item.menu }}
+      </ion-item>
+      <ion-list-header>
+        Dessert/Fromage
+      </ion-list-header>
+      <ion-item  *ngFor="let item of currentMenu['Dessert/Fromage']">
+        {{ item.menu }}
+      </ion-item>
+      <ion-list-header>
+        Allergènes
+      </ion-list-header>
+      <ion-item>On dev</ion-item>
+    </ion-list>
+  </ion-card>
 </ion-content>
