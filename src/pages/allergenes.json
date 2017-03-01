@@ -1,0 +1,19 @@
+{
+"allergenes": 
+    [
+        {"code": 1, "label": "Gluten" },
+        {"code": 2, "label": "Lait de vache (ou produits dérivés, beurre, crème)" },
+        {"code": 3, "label": "Lait de brebis ou chèvre" },
+        {"code": 4, "label": "Œuf" },
+        {"code": 5, "label": "Moutarde" },
+        {"code": 6, "label": "Poisson" },
+        {"code": 7, "label": "Arachide" },
+        {"code": 8, "label": "Fruit à coque" },
+        {"code": 9, "label": "Crustacés" },
+        {"code": 10, "label": "Mollusques" },
+        {"code": 11, "label": "Céleri" },
+        {"code": 12, "label": "Soja" },
+        {"code": 13, "label": "Anhydride sulfureux et sulfite" },
+        {"code": 14, "label": "Sésame" }
+    ]
+}

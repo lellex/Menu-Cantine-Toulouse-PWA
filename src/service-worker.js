@@ -20,7 +20,7 @@ self.toolbox.precache(
     'index.html',
     'manifest.json'
   ]
-);
+); 
 
 // dynamically cache any other local assets
 self.toolbox.router.any('/*', self.toolbox.cacheFirst);
@@ -28,3 +28,8 @@ self.toolbox.router.any('/*', self.toolbox.cacheFirst);
 // for any other requests go to the network, cache,
 // and then only use that cached resource if your user goes offline
 self.toolbox.router.default = self.toolbox.networkFirst;
+
+// The route for any requests from the googleapis origin
+self.toolbox.router.get('/(.*)', self.toolbox.cacheFirst, {
+  origin: /\.data.toulouse-metropole\.fr$/
+});

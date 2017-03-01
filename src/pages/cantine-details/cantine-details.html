@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
+  <ion-card (swipe)="weekSwipe($event)">
      <ion-item class="week">
         <button ion-button item-left (click)="weekBack()">
           <ion-icon name="arrow-round-back"></ion-icon>
@@ -18,7 +18,7 @@
         </button>
     </ion-item>
   </ion-card>
-  <ion-card>
+  <ion-card (swipe)="daySwipe($event)">
     <ion-item class="week">
         <button ion-button item-left (click)="dayBack()">
           <ion-icon name="arrow-round-back"></ion-icon>
@@ -34,29 +34,36 @@
       </ion-list-header>
       <ion-item  *ngFor="let item of currentMenu['Pain']">
         {{ item.menu }}
+        {{ item.allergenes }}
       </ion-item>
       <ion-list-header>
         Entrée
       </ion-list-header>
       <ion-item  *ngFor="let item of currentMenu['Entrée']">
         {{ item.menu }}
+        {{ item.allergenes }}
       </ion-item>
       <ion-list-header>
         Plat
       </ion-list-header>
       <ion-item  *ngFor="let item of currentMenu['Plat']">
         {{ item.menu }}
+        {{ item.allergenes }}
       </ion-item>
       <ion-list-header>
         Dessert/Fromage
       </ion-list-header>
       <ion-item  *ngFor="let item of currentMenu['Dessert/Fromage']">
         {{ item.menu }}
+        {{ item.allergenes }}
       </ion-item>
       <ion-list-header>
         Allergènes
       </ion-list-header>
-      <ion-item>On dev</ion-item>
+      <ion-item *ngFor="let item of currentMenu['Allergenes']">
+        {{item.code}}
+        {{item.label}}
+      </ion-item>
     </ion-list>
   </ion-card>
 </ion-content>

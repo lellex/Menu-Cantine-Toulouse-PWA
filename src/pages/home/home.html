@@ -13,9 +13,22 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="openNavDetailsPage(item)" icon-left>
-      {{ item.name }}
-    </button>
+  <ion-card *ngIf="items.length === 0">
+    <ion-item text-wrap>
+        Aucune cantine sélectionnée
+    </ion-item>
+  </ion-card>
+  <ion-list *ngIf="items.length > 0">
+    <ion-item-sliding *ngFor="let item of items">
+      <ion-item ion-item (click)="openNavDetailsPage(item)" icon-left>
+          {{ item.name }}
+      </ion-item>
+      <ion-item-options (click)="deleteCantine(item)"  side="right">
+        <button ion-button color="primary">
+          <ion-icon name="trash"></ion-icon>
+            Supprimer
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>

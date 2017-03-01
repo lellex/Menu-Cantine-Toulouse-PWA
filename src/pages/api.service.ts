@@ -19,14 +19,15 @@ export class cantineService{
   getAllElementaires(): Observable<Cantine[]> {
     let cantine$ = this.http
       .get(`${this.baseUrl}/records/1.0/search/?dataset=ecoles-elementaires-publiques&rows=1000`, {headers: this.getHeaders()})
-      .map(mapCantinesElem);
+      .map(mapCantinesElem)
       return cantine$;
   }
 
   getMenuByTypeMonth(type :string, monthName: string): Observable<any> {
     let menu$ = this.http
       .get(`${this.baseUrl}/records/1.0/search/?dataset=menus-cantine-ville-de-toulouse-${monthName}&rows=1000&facet=ecole&refine.ecole=${type}`, {headers: this.getHeaders()})
-      .map(mapMenu);
+      .map(mapMenu)
+      .catch(handleError);
       return menu$;
   }
 
@@ -39,7 +40,7 @@ export class cantineService{
 }
 
 function handleError (error: any) {
-  let errorMsg = error.message || `Yikes! There was was a problem with our hyperdrive device and we couldn't retrieve your data!`
+  let errorMsg = error.message || `couldn't retrieve data`
   console.error(errorMsg);
 
   return Observable.throw(errorMsg);
@@ -59,7 +60,7 @@ function toCantineMat(r:any): Cantine{
 }
 
 function mapCantinesElem(response:Response): Cantine[]{
-   return response.json().records.map(toCantineMat)
+   return response.json().records.map(toCantineElem)
 }
 
 function toCantineElem(r:any): Cantine{
