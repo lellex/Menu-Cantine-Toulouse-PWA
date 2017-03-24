@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { CantineDetailsPage } from '../cantine-details/cantine-details';
 import { CantineListPage } from '../cantine-list/cantine-list';
 import {cantineService} from '../api.service';
