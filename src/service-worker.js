@@ -30,6 +30,4 @@ self.toolbox.router.any('/*', self.toolbox.cacheFirst);
 self.toolbox.router.default = self.toolbox.networkFirst;
 
 // The route for any requests from the googleapis origin
-// self.toolbox.router.get('/(.*)', self.toolbox.networkFirst, {
-//   origin: /\.data.toulouse-metropole\.fr$/
-// });
+self.toolbox.router.get(' /\.data.toulouse-metropole\.fr$/', self.toolbox.networkFirst, {});
